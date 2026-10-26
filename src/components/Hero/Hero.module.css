@@ -58,12 +58,14 @@
 }
 
 .name {
+  font-family: var(--font-heading);
   font-size: clamp(2.4rem, 5.5vw, 4.5rem);
   font-weight: 800;
-  line-height: 1.08;
+  line-height: 1.05;
   margin-bottom: 1.25rem;
   color: var(--text-primary);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
 }
 
 .typewriterWrapper {
@@ -81,16 +83,20 @@
   font-family: var(--font-mono);
   font-size: clamp(1.2rem, 2.5vw, 1.9rem);
   font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .description {
+  font-family: var(--font-main);
   color: var(--text-secondary);
-  font-size: 1.02rem;
-  line-height: 1.75;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  letter-spacing: -0.012em;
   margin-bottom: 2.5rem;
   max-width: 520px;
   margin-left: auto;
   margin-right: auto;
+  text-wrap: pretty;
 }
 
 @media (min-width: 992px) {
@@ -152,18 +158,26 @@
   transform: translateY(-2px);
 }
 
-/* ─── PHOTO ─── */
-.photoWrapper {
-  width: 300px;
-  height: 300px;
-  flex-shrink: 0;
+.btnTertiary {
+  background: var(--surface-dark);
+  color: var(--text-secondary);
+  border: 1px solid var(--glass-border-subtle);
 }
 
-@media (min-width: 992px) {
-  .photoWrapper {
-    width: 380px;
-    height: 380px;
-  }
+.btnTertiary:hover {
+  background: var(--surface-subtle);
+  border-color: var(--accent-amber);
+  color: var(--accent-amber);
+  box-shadow: 0 0 16px rgba(255, 180, 84, 0.25);
+  transform: translateY(-2px);
+}
+
+/* ─── PHOTO ─── */
+.photoWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 /* ─── BACKGROUND GLOWS ─── */

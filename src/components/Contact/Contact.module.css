@@ -57,19 +57,24 @@
 }
 
 .contactInfo h3 {
+  font-family: var(--font-heading);
   font-size: 2rem;
   font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 1rem;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 
 .contactInfo p {
+  font-family: var(--font-main);
   color: var(--text-secondary);
-  font-size: 1rem;
+  font-size: 1.02rem;
   margin-bottom: 2.5rem;
   max-width: 460px;
-  line-height: 1.7;
+  line-height: 1.75;
+  letter-spacing: -0.012em;
+  text-wrap: pretty;
 }
 
 .infoItems {

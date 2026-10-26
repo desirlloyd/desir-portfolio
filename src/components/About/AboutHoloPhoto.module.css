@@ -1,0 +1,363 @@
+/* ── Holographic Stabilization Container ────────────────── */
+.container {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  user-select: none;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 350px;
+    height: 350px;
+  }
+}
+
+@media (max-width: 991px) {
+  .container {
+    width: 260px;
+    height: 260px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 220px;
+    height: 220px;
+  }
+}
+
+/* ── HUD Corner Tech Accents ─────────────────────────────── */
+.corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: rgba(183, 255, 90, 0.5);
+  z-index: 6;
+  pointer-events: none;
+  transition: border-color 0.8s ease, filter 0.8s ease;
+}
+
+.active .corner {
+  border-color: var(--accent-green);
+  filter: drop-shadow(0 0 4px rgba(183, 255, 90, 0.5));
+}
+
+.cornerTL {
+  top: -6px;
+  left: -6px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+
+.cornerTR {
+  top: -6px;
+  right: -6px;
+  border-top: 2px solid;
+  border-right: 2px solid;
+}
+
+.cornerBL {
+  bottom: -6px;
+  left: -6px;
+  border-bottom: 2px solid;
+  border-left: 2px solid;
+}
+
+.cornerBR {
+  bottom: -6px;
+  right: -6px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+}
+
+/* ── HUD Telemetry Labels ────────────────────────────────── */
+.topTelemetry {
+  position: absolute;
+  top: -24px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  color: var(--accent-green);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.telemetryTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(183, 255, 90, 0.08);
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+  border: 1px solid rgba(183, 255, 90, 0.25);
+  font-weight: 600;
+  transition: all 0.4s ease;
+}
+
+.statusDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-amber);
+  box-shadow: 0 0 6px var(--accent-amber);
+  transition: background 0.5s ease, box-shadow 0.5s ease;
+}
+
+.stabilized .statusDot {
+  background: var(--accent-green);
+  box-shadow: 0 0 6px var(--accent-green);
+}
+
+.telemetryIndex {
+  color: var(--text-muted);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+}
+
+.bottomTelemetry {
+  position: absolute;
+  bottom: -22px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.coords {
+  color: var(--text-muted);
+}
+
+.statusLabel {
+  color: var(--accent-amber);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  transition: color 0.5s ease;
+}
+
+.stabilized .statusLabel {
+  color: var(--accent-green);
+}
+
+/* ── Main Frame ──────────────────────────────────────────── */
+.frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #080B0A;
+  border: 1px solid rgba(183, 255, 90, 0.18);
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.7),
+    0 0 20px rgba(183, 255, 90, 0.08);
+  transition: border-color 0.8s ease, box-shadow 0.8s ease;
+}
+
+.stabilized .frame {
+  border-color: rgba(183, 255, 90, 0.35);
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.75),
+    0 0 28px rgba(183, 255, 90, 0.16);
+}
+
+/* ── SVG Drawing Contour ─────────────────────────────────── */
+.contourSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.contourRect {
+  fill: none;
+  stroke: var(--accent-green);
+  stroke-width: 1.5;
+  stroke-dasharray: 1300;
+  stroke-dashoffset: 1300;
+  filter: drop-shadow(0 0 4px var(--accent-green));
+}
+
+.active .contourRect {
+  animation: drawBorder 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes drawBorder {
+  0% {
+    stroke-dashoffset: 1300;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  90% {
+    stroke-dashoffset: 0;
+    opacity: 0.9;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.45;
+  }
+}
+
+/* ── Profile Photo (Progressive Focus Stabilization) ─────── */
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+  opacity: 0;
+  filter: blur(14px) contrast(1.15) brightness(0.85);
+  transform: scale(0.96);
+  transition:
+    opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.3s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.active .photo {
+  opacity: 1;
+  filter: blur(0px) contrast(1.02) brightness(1);
+  transform: scale(1);
+}
+
+/* ── Ambient Dark Tint ───────────────────────────────────── */
+.ambientOverlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 65%, rgba(8, 11, 10, 0.6) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── Calibration Overlay (Fades out when stabilized) ─────── */
+.calibrationOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.active .calibrationOverlay {
+  opacity: 1;
+  animation: fadeOutGrid 1.8s ease forwards;
+}
+
+.centerReticle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  color: var(--accent-green);
+  opacity: 0.65;
+  text-shadow: 0 0 6px var(--accent-green);
+}
+
+.axisH {
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(183, 255, 90, 0.25) 30%, rgba(183, 255, 90, 0.25) 70%, transparent);
+}
+
+.axisV {
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  bottom: 15%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(183, 255, 90, 0.25) 30%, rgba(183, 255, 90, 0.25) 70%, transparent);
+}
+
+@keyframes fadeOutGrid {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.8;
+  }
+  70% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.15;
+  }
+}
+
+/* ── Specular Light Sheen (Reflet Lumineux) ───────────────── */
+.specularSheen {
+  position: absolute;
+  inset: -100%;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0;
+}
+
+.stabilized .specularSheen {
+  animation: specularSweep 7.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 0.8s;
+}
+
+@keyframes specularSweep {
+  0% {
+    opacity: 0;
+    transform: translate(-100%, -100%) rotate(35deg);
+  }
+  5% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 1;
+    transform: translate(100%, 100%) rotate(35deg);
+  }
+  25% {
+    opacity: 0;
+    transform: translate(100%, 100%) rotate(35deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-100%, -100%) rotate(35deg);
+  }
+}
+
+.specularSheen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(183, 255, 90, 0.08) 45%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(183, 255, 90, 0.08) 55%,
+    transparent 100%
+  );
+  filter: blur(4px);
+}

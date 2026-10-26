@@ -1,25 +1,38 @@
 import React from 'react';
 import { TypeAnimation } from 'react-type-animation';
 import { motion } from 'framer-motion';
-import ProfilePhoto from '../ProfilePhoto/ProfilePhoto';
+import Magnetic from '../Magnetic/Magnetic';
+import CvDownload from '../CvDownload/CvDownload';
+import HeroScanPhoto from './HeroScanPhoto';
+import { useLanguage } from '../../contexts/LanguageContext';
 import styles from './Hero.module.css';
 
+/**
+ * Hero Section
+ * 
+ * Standalone Hero section with independent HeroScanPhoto.
+ * Includes multi-language support, magnetic CTA buttons,
+ * and high-tech biometric diagnostic scanner.
+ */
 const Hero = () => {
+  const { language, t } = useLanguage();
+
   return (
     <section id="hero" className={styles.hero}>
-      {/* Background decorative elements */}
-      <div className={styles.glowBL}></div>
-      <div className={styles.glowTR}></div>
+      {/* Background ambient glows */}
+      <div className={styles.glowBL} aria-hidden />
+      <div className={styles.glowTR} aria-hidden />
 
       <div className={styles.container}>
-        {/* Left: Text content */}
+        {/* Left: Text Content */}
         <motion.div
           className={styles.content}
-          initial={{ opacity: 0, x: -40 }}
+          initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
         >
-          <span className={styles.greeting}>Bonjour, je suis</span>
+          <span className={styles.greeting}>{t('hero.greeting')}</span>
+
           <h1 className={styles.name}>
             Desir Lloyd<br />Barry Johanson
           </h1>
@@ -27,11 +40,12 @@ const Hero = () => {
           <div className={styles.typewriterWrapper}>
             <span className={styles.typePrefix}>&lt; </span>
             <TypeAnimation
+              key={language}
               sequence={[
-                'Fullstack Developer', 2200,
-                'React Specialist', 2200,
-                'Problem Solver', 2200,
-                'UI/UX Enthusiast', 2200,
+                t('hero.role1'), 2200,
+                t('hero.role2'), 2200,
+                t('hero.role3'), 2200,
+                t('hero.role4'), 2200,
               ]}
               wrapper="span"
               speed={50}
@@ -42,28 +56,41 @@ const Hero = () => {
           </div>
 
           <p className={styles.description}>
-            Je conçois des expériences web modernes, performantes et hautement
-            interactives avec une attention méticuleuse au design et à la qualité du code.
+            {t('hero.description')}
           </p>
 
           <div className={styles.ctaGroup}>
-            <a href="#projects" className={`${styles.btn} ${styles.btnPrimary}`}>
-              Voir mes projets
-            </a>
-            <a href="#contact" className={`${styles.btn} ${styles.btnSecondary}`}>
-              Me contacter
-            </a>
+            <Magnetic>
+              <a href="#projects" className={`${styles.btn} ${styles.btnPrimary}`}>
+                {t('hero.viewProjects')}
+              </a>
+            </Magnetic>
+
+            <Magnetic>
+              <CvDownload
+                className={`${styles.btn} ${styles.btnSecondary}`}
+                iconSize={18}
+              >
+                {t('hero.downloadCV')}
+              </CvDownload>
+            </Magnetic>
+
+            <Magnetic>
+              <a href="#contact" className={`${styles.btn} ${styles.btnTertiary}`}>
+                {t('hero.contactMe')}
+              </a>
+            </Magnetic>
           </div>
         </motion.div>
 
-        {/* Right: Profile photo (flips when About section hits viewport) */}
+        {/* Right: Independent Hero Profile Photo with Biometric Scanner Animation */}
         <motion.div
           className={styles.photoWrapper}
-          initial={{ opacity: 0, scale: 0.85 }}
+          initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, delay: 0.2, ease: 'easeOut' }}
         >
-          <ProfilePhoto />
+          <HeroScanPhoto />
         </motion.div>
       </div>
     </section>

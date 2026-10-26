@@ -1,13 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import ProfilePhoto from '../ProfilePhoto/ProfilePhoto';
+import AboutHoloPhoto from './AboutHoloPhoto';
+import Typewriter from '../Typewriter/Typewriter';
+import Magnetic from '../Magnetic/Magnetic';
+import CvDownload from '../CvDownload/CvDownload';
 import { useCountUp } from '../../hooks/useCountUp';
+import { useLanguage } from '../../contexts/LanguageContext';
 import styles from './About.module.css';
 
-// Individual stat card with its own custom count-up trigger
+// Individual stat box with count-up animation
 const StatCard = ({ stat }) => {
-  const [count, countRef] = useCountUp(stat.number, 2200);
+  const [count, countRef] = useCountUp(stat.number, 2000);
   return (
     <div className={styles.statBox} ref={countRef}>
       <h4 className={styles.statNumber}>
@@ -18,58 +22,83 @@ const StatCard = ({ stat }) => {
   );
 };
 
-const stats = [
-  { number: 3, suffix: '+', label: "Ans d'expérience" },
-  { number: 20, suffix: '+', label: 'Projets livrés' },
-  { number: 10, suffix: '+', label: 'Clients satisfaits' },
-];
-
+/**
+ * About Section
+ * 
+ * Standalone About section with independent AboutHoloPhoto.
+ * Features:
+ *  - Holographic stabilization animation on the profile photo
+ *  - Responsive grid layout preserving proportions
+ *  - Multi-language content, typewriter header, and count-up stats
+ */
 const About = () => {
-  const [ref, inView] = useInView({ threshold: 0.2, triggerOnce: true });
+  const { language, t } = useLanguage();
+  const [ref, inView] = useInView({ threshold: 0.15, triggerOnce: true });
+
+  const stats = [
+    { number: 1, suffix: '+', label: t('about.stats.exp') },
+    { number: 3, suffix: '+', label: t('about.stats.education') },
+    { number: 3, suffix: '', label: t('about.stats.languages') },
+  ];
 
   return (
     <section id="about" className={styles.about} ref={ref}>
       <div className={styles.container}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.title}>
-            À <span className="gradient-text typewriter-target" data-word="propos"></span>
+            <Typewriter
+              key={language}
+              segments={t('about.title').split(' ').map((part, idx, arr) => ({
+                text: part + (idx < arr.length - 1 ? ' ' : ''),
+                className: idx === arr.length - 1 ? 'gradient-text' : ''
+              }))}
+            />
           </h2>
-          <div className={styles.line}></div>
+          <div className={styles.line} aria-hidden />
         </div>
 
         <div className={styles.content}>
+          {/* Left: Independent Profile Photo with Holographic Stabilization */}
           <motion.div
             className={styles.photoWrapper}
-            initial={{ opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
+            initial={{ opacity: 0, x: -30 }}
+            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
             transition={{ duration: 0.7 }}
           >
-            <ProfilePhoto />
+            <AboutHoloPhoto />
           </motion.div>
 
+          {/* Right: Bio Text and Metrics */}
           <motion.div
             className={styles.textContent}
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
+            initial={{ opacity: 0, x: 30 }}
+            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
             transition={{ duration: 0.7, delay: 0.15 }}
           >
             <h3 className={styles.subtitle}>
-              Passionné par le code et l'expérience utilisateur
+              {t('about.subtitle')}
             </h3>
+
             <p className={styles.bio}>
-              En tant que développeur fullstack, j'allie expertise technique et sensibilité design
-              pour créer des applications web qui sont non seulement fonctionnelles, mais aussi captivantes.
+              {t('about.bio1')}
             </p>
+
             <p className={styles.bio}>
-              J'ai travaillé sur divers projets allant de l'intégration d'interfaces complexes à
-              l'architecture de systèmes backend robustes. Mon approche est centrée sur la qualité du code,
-              les performances et l'innovation continue.
+              {t('about.bio2')}
             </p>
 
             <div className={styles.statsContainer}>
               {stats.map((stat, index) => (
-                <StatCard key={index} stat={stat} />
+                <StatCard key={`${index}-${language}`} stat={stat} />
               ))}
+            </div>
+
+            <div className={styles.ctaRow}>
+              <Magnetic>
+                <CvDownload className={styles.downloadBtn} iconSize={16}>
+                  {t('about.downloadCV')}
+                </CvDownload>
+              </Magnetic>
             </div>
           </motion.div>
         </div>

@@ -41,33 +41,16 @@ const Navbar = () => {
       setIsScrolled(window.scrollY > 50);
 
       const scrollY = window.scrollY;
-      const vh = window.innerHeight;
+      const sectionIds = ['hero', 'about', 'skills', 'projects', 'contact'];
+      let current = 'hero';
 
-      // ── ScrollScene: hero vs about ──────────────────────────────
-      // #hero and #about live inside a position:sticky container and
-      // are not in normal document flow. Detect them by computing the
-      // scroll progress (p) within the 300vh wrapper.
-      const sceneEl = document.querySelector('[data-scroll-scene]');
-      if (sceneEl) {
-        const sceneTop  = sceneEl.offsetTop;
-        const sceneH    = sceneEl.offsetHeight - vh;
-        if (scrollY >= sceneTop && scrollY < sceneTop + sceneEl.offsetHeight) {
-          const p = Math.max(0, Math.min(1, (scrollY - sceneTop) / Math.max(sceneH, 1)));
-          // hero fades out up to p=0.55, about fades in from p=0.55
-          setActiveSection(p < 0.55 ? 'hero' : 'about');
-          return;
-        }
-      }
-
-      // ── Sections after the scroll scene ─────────────────────────
-      const otherIds = ['skills', 'projects', 'contact'];
-      let current = 'about'; // default if we're past the scene
-      for (const id of otherIds) {
+      for (const id of sectionIds) {
         const el = document.getElementById(id);
-        if (el && scrollY >= el.offsetTop - 150) {
+        if (el && scrollY >= el.offsetTop - 180) {
           current = id;
         }
       }
+
       setActiveSection(current);
     };
 
