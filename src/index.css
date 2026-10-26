@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  /* GINKTIK.OS Color Palette */
+  --bg-color: #080B0A;
+  --surface-dark: #101613;
+  --surface-subtle: #141D19;
+  --surface-elevated: #18241E;
+  --surface-hover: #1D2C24;
+
+  /* Accents */
+  --accent-green: #B7FF5A;
+  --accent-amber: #FFB454;
+  --accent-green-glow: rgba(183, 255, 90, 0.25);
+  --accent-amber-glow: rgba(255, 180, 84, 0.25);
+
+  /* Fallback aliases for any component referencing cyan / purple */
+  --accent-cyan: #B7FF5A;
+  --accent-purple: #FFB454;
+
+  /* Typography */
+  --text-primary: #F0F4EF;
+  --text-secondary: #8E9F96;
+  --text-muted: #586B61;
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Space Mono', monospace;
+
+  /* System Borders & Glass */
+  --glass-bg: rgba(16, 22, 19, 0.72);
+  --glass-border: rgba(183, 255, 90, 0.14);
+  --glass-border-subtle: rgba(240, 244, 239, 0.07);
+  --glass-border-bright: rgba(183, 255, 90, 0.45);
+  
+  --transition-smooth: all 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 100%; /* 16px */
+  background-color: var(--bg-color);
+  color-scheme: dark;
+}
+
+@media (max-width: 1024px) {
+  html {
+    font-size: 93.75%; /* 15px */
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 87.5%; /* 14px */
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 81.25%; /* 13px */
+  }
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  /* Discreet technical grid pattern */
+  background-image: 
+    linear-gradient(to right, rgba(183, 255, 90, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(183, 255, 90, 0.025) 1px, transparent 1px);
+  background-size: 44px 44px;
+  background-attachment: fixed;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #080B0A;
+  border-left: 1px solid rgba(183, 255, 90, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #192620;
+  border-radius: 2px;
+  border: 1px solid rgba(183, 255, 90, 0.15);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B7FF5A;
+  box-shadow: 0 0 10px rgba(183, 255, 90, 0.5);
+}
+
+/* Selection */
+::selection {
+  background: rgba(183, 255, 90, 0.28);
+  color: #B7FF5A;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  background: none;
+}
+
+/* Reusable Utility Classes */
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-amber) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+.neon-glow {
+  box-shadow: 0 0 20px rgba(183, 255, 90, 0.22), 0 0 45px rgba(255, 180, 84, 0.12);
+}
+
+.glass-card {
+  background: var(--surface-dark);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+}
+
+.cursor {
+  display: inline-block;
+  margin-left: 2px;
+  animation: blink 0.7s step-end infinite;
+  color: var(--accent-green);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}

@@ -1,0 +1,38 @@
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  margin-left: -12px;
+  margin-top: -12px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transform: translate3d(0, 0, 0) scale(0.5);
+  background: rgba(183, 255, 90, 0.4);
+  box-shadow: 0 0 15px 5px rgba(183, 255, 90, 0.25);
+  transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+              height 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+              margin 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+              background 0.3s ease,
+              box-shadow 0.3s ease,
+              opacity 0.4s ease;
+  mix-blend-mode: screen;
+}
+
+.cursor.visible {
+  opacity: 1;
+}
+
+.cursor.hovered {
+  width: 50px;
+  height: 50px;
+  margin-left: -25px;
+  margin-top: -25px;
+  background: rgba(255, 180, 84, 0.22);
+  box-shadow: 0 0 25px 8px rgba(255, 180, 84, 0.25);
+  border: 1px solid rgba(255, 180, 84, 0.5);
+  backdrop-filter: blur(2px);
+}

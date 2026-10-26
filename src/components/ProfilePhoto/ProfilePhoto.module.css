@@ -1,0 +1,108 @@
+.cardScene {
+  perspective: 1200px;
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+  border-radius: 50%;
+}
+
+.card.flipped {
+  transform: rotateY(180deg);
+}
+
+.face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: contrast(105%) saturate(1.05);
+}
+
+.front {
+  transform: rotateY(0deg);
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+/* Neon glow borders */
+.glowBorder {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--accent-green);
+  box-shadow:
+    0 0 15px rgba(183, 255, 90, 0.4),
+    0 0 40px rgba(183, 255, 90, 0.15),
+    inset 0 0 20px rgba(183, 255, 90, 0.05);
+  animation: glowPulse 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.glowBorderAlt {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--accent-amber);
+  box-shadow:
+    0 0 15px rgba(255, 180, 84, 0.4),
+    0 0 40px rgba(255, 180, 84, 0.15),
+    inset 0 0 20px rgba(255, 180, 84, 0.05);
+  animation: glowPulseAlt 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Colour overlay */
+.glowOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(183, 255, 90, 0.12) 0%, transparent 60%, rgba(255, 180, 84, 0.1) 100%);
+  pointer-events: none;
+}
+
+.glowOverlayAlt {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(255, 180, 84, 0.14) 0%, transparent 60%, rgba(183, 255, 90, 0.1) 100%);
+  pointer-events: none;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(183, 255, 90, 0.35), 0 0 40px rgba(183, 255, 90, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(183, 255, 90, 0.6), 0 0 60px rgba(183, 255, 90, 0.25);
+  }
+}
+
+@keyframes glowPulseAlt {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(255, 180, 84, 0.35), 0 0 40px rgba(255, 180, 84, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 180, 84, 0.6), 0 0 60px rgba(255, 180, 84, 0.25);
+  }
+}

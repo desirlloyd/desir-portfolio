@@ -1,0 +1,226 @@
+.contact {
+  padding: 6rem 0;
+  min-height: 80vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+.sectionHeader {
+  margin-bottom: 3.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.title {
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+}
+
+.line {
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, rgba(183, 255, 90, 0.35));
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+@media (min-width: 992px) {
+  .content {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 4rem;
+  }
+}
+
+.contactInfo {
+  flex: 1;
+}
+
+.contactInfo h3 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.contactInfo p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 2.5rem;
+  max-width: 460px;
+  line-height: 1.7;
+}
+
+.infoItems {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.infoBox {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.iconWrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: var(--surface-dark);
+  color: var(--accent-green);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+  border: 1px solid rgba(183, 255, 90, 0.25);
+  transition: var(--transition-smooth);
+}
+
+.infoBox:hover .iconWrapper {
+  background: rgba(183, 255, 90, 0.12);
+  border-color: var(--accent-green);
+  box-shadow: 0 0 18px rgba(183, 255, 90, 0.35);
+}
+
+.infoBox h4 {
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.25rem;
+}
+
+.infoBox a, .infoBox p {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  transition: var(--transition-smooth);
+}
+
+.infoBox a:hover {
+  color: var(--accent-green);
+}
+
+.contactForm {
+  flex: 1;
+  background: var(--surface-dark);
+  padding: 2.2rem;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+
+.formGroup {
+  margin-bottom: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.formGroup label {
+  color: var(--accent-green);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.formGroup input,
+.formGroup textarea {
+  width: 100%;
+  padding: 0.9rem 1.1rem;
+  background: #080B0A;
+  border: 1px solid rgba(183, 255, 90, 0.14);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  transition: all 0.25s ease;
+  outline: none;
+}
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  border-color: var(--accent-green);
+  box-shadow: 0 0 16px rgba(183, 255, 90, 0.2);
+  background: #0b100d;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 0.95rem;
+  background: var(--accent-green);
+  color: #080B0A;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.92rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 6px;
+  margin-top: 1rem;
+  transition: var(--transition-smooth);
+  border: 1px solid var(--accent-green);
+  box-shadow: 0 0 20px rgba(183, 255, 90, 0.3);
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: #c8ff7d;
+  box-shadow: 0 0 35px rgba(183, 255, 90, 0.6);
+  transform: translateY(-2px);
+}
+
+.submitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.formStatus {
+  margin-top: 1rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.formStatus.success {
+  color: var(--accent-green);
+  background: rgba(183, 255, 90, 0.08);
+  border: 1px solid rgba(183, 255, 90, 0.3);
+}
+
+.formStatus.error {
+  color: var(--accent-amber);
+  background: rgba(255, 180, 84, 0.08);
+  border: 1px solid rgba(255, 180, 84, 0.3);
+}
