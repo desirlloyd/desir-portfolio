@@ -4,18 +4,22 @@ import { motion } from 'framer-motion';
 import Magnetic from '../Magnetic/Magnetic';
 import CvDownload from '../CvDownload/CvDownload';
 import HeroScanPhoto from './HeroScanPhoto';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { useLanguage } from '../../hooks/useLanguage';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 import styles from './Hero.module.css';
 
 /**
  * Hero Section
- * 
+ *
  * Standalone Hero section with independent HeroScanPhoto.
  * Includes multi-language support, magnetic CTA buttons,
  * and high-tech biometric diagnostic scanner.
+ * Reduced motion: the typed role renders statically and entrance
+ * animations collapse to their final state (MotionConfig).
  */
 const Hero = () => {
   const { language, t } = useLanguage();
+  const reducedMotion = useReducedMotion();
 
   return (
     <section id="hero" className={styles.hero}>
@@ -39,19 +43,25 @@ const Hero = () => {
 
           <div className={styles.typewriterWrapper}>
             <span className={styles.typePrefix}>&lt; </span>
-            <TypeAnimation
-              key={language}
-              sequence={[
-                t('hero.role1'), 2200,
-                t('hero.role2'), 2200,
-                t('hero.role3'), 2200,
-                t('hero.role4'), 2200,
-              ]}
-              wrapper="span"
-              speed={50}
-              className={`gradient-text ${styles.typeText}`}
-              repeat={Infinity}
-            />
+            {reducedMotion ? (
+              <span className={`gradient-text ${styles.typeText}`}>
+                {t('hero.role1')}
+              </span>
+            ) : (
+              <TypeAnimation
+                key={language}
+                sequence={[
+                  t('hero.role1'), 2200,
+                  t('hero.role2'), 2200,
+                  t('hero.role3'), 2200,
+                  t('hero.role4'), 2200,
+                ]}
+                wrapper="span"
+                speed={50}
+                className={`gradient-text ${styles.typeText}`}
+                repeat={Infinity}
+              />
+            )}
             <span className={styles.typePrefix}> /&gt;</span>
           </div>
 

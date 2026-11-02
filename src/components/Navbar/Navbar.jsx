@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './Navbar.module.css';
 import { FiMenu, FiX, FiGlobe, FiChevronDown } from 'react-icons/fi';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { useLanguage } from '../../hooks/useLanguage';
 import CvDownload from '../CvDownload/CvDownload';
 
 const navLinks = [
@@ -32,9 +32,60 @@ const Navbar = () => {
         setLangDropdownOpen(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('pointerdown', handleClickOutside);
+    return () => document.removeEventListener('pointerdown', handleClickOutside);
   }, []);
+
+  useEffect(() => {
+    if (!langDropdownOpen) return undefined;
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setLangDropdownOpen(false);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [langDropdownOpen]);
+
+  // Lock scroll and handle Escape key for mobile drawer
+  useEffect(() => {
+    if (!mobileMenuOpen) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [mobileMenuOpen]);
+
+  const handleLangKeyDown = (e) => {
+    if (!langDropdownOpen) {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        setLangDropdownOpen(true);
+      }
+      return;
+    }
+
+    const currentIndex = languages.findIndex((l) => l.code === language);
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const nextIndex = (currentIndex + 1) % languages.length;
+      setLanguage(languages[nextIndex].code);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const prevIndex = (currentIndex - 1 + languages.length) % languages.length;
+      setLanguage(languages[prevIndex].code);
+    }
+  };
 
   useEffect(() => {
     const detectSection = () => {
@@ -90,19 +141,29 @@ const Navbar = () => {
           </CvDownload>
 
           <div className={styles.langSwitcher} ref={dropdownRef}>
-            <button 
+            <button
               className={styles.langBtn}
               onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-              aria-label="Change language"
+              onKeyDown={handleLangKeyDown}
+              aria-label={t('nav.changeLanguage')}
+              aria-haspopup="menu"
+              aria-expanded={langDropdownOpen}
+              aria-controls="lang-menu"
             >
               <FiGlobe size={16} />
               <span className={styles.langText}>{language.toUpperCase()}</span>
               <FiChevronDown size={14} className={`${styles.chevron} ${langDropdownOpen ? styles.rotate : ''}`} />
             </button>
-            <div className={`${styles.langDropdown} ${langDropdownOpen ? styles.open : ''}`}>
+            <div
+              id="lang-menu"
+              role="menu"
+              className={`${styles.langDropdown} ${langDropdownOpen ? styles.open : ''}`}
+            >
               {languages.map((lang) => (
                 <button
                   key={lang.code}
+                  role="menuitemradio"
+                  aria-checked={language === lang.code}
                   className={`${styles.langOption} ${language === lang.code ? styles.active : ''}`}
                   onClick={() => {
                     setLanguage(lang.code);
@@ -115,9 +176,12 @@ const Navbar = () => {
             </div>
           </div>
 
-          <button 
+          <button
             className={styles.mobileToggle}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={t('nav.menu')}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             {mobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
           </button>
@@ -125,7 +189,10 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`${styles.mobileMenu} ${mobileMenuOpen ? styles.open : ''}`}>
+      <div
+        id="mobile-menu"
+        className={`${styles.mobileMenu} ${mobileMenuOpen ? styles.open : ''}`}
+      >
         <ul>
           {navLinks.map((link) => (
             <li key={link.href}>

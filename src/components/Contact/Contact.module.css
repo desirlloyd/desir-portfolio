@@ -28,7 +28,8 @@
   font-size: clamp(2rem, 3.8vw, 3rem);
   font-weight: 800;
   color: var(--text-primary);
-  white-space: nowrap;
+  overflow-wrap: break-word;
+  text-wrap: balance;
   letter-spacing: -0.02em;
 }
 
@@ -180,6 +181,13 @@
   background: #0b100d;
 }
 
+@media (max-width: 768px) {
+  .formGroup input,
+  .formGroup textarea {
+    font-size: 16px; /* Prevents iOS Safari auto-zoom on field focus */
+  }
+}
+
 .submitBtn {
   width: 100%;
   padding: 0.95rem;
@@ -198,7 +206,7 @@
 }
 
 .submitBtn:hover:not(:disabled) {
-  background: #c8ff7d;
+  background: var(--accent-green-hover);
   box-shadow: 0 0 35px rgba(183, 255, 90, 0.6);
   transform: translateY(-2px);
 }

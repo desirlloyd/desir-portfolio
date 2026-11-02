@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Footer.module.css';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { useLanguage } from '../../hooks/useLanguage';
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -12,7 +12,7 @@ const Footer = () => {
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.brand}>
-            <h3>Desir Lloyd Barry Johanson</h3>
+            <p className={styles.brandTitle}>Desir Lloyd Barry Johanson</p>
             <p className={styles.tagline}>{t('footer.tagline')}</p>
           </div>
           

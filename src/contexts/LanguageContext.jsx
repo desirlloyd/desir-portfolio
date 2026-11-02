@@ -1,7 +1,6 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { translations } from '../utils/translations';
-
-const LanguageContext = createContext();
+import { LanguageContext } from './LanguageContextInstance';
 
 export const LanguageProvider = ({ children }) => {
   // Try to load language from localStorage, default to 'fr'
@@ -58,12 +57,4 @@ export const LanguageProvider = ({ children }) => {
       {children}
     </LanguageContext.Provider>
   );
-};
-
-export const useLanguage = () => {
-  const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
-  }
-  return context;
 };

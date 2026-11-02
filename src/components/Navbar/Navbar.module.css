@@ -3,7 +3,10 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 1.25rem 0;
+  padding-top: max(1.25rem, env(safe-area-inset-top, 0px));
+  padding-bottom: 1.25rem;
+  padding-left: 0;
+  padding-right: 0;
   z-index: 100;
   transition: var(--transition-smooth);
   border-bottom: 1px solid transparent;
@@ -15,7 +18,8 @@
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(183, 255, 90, 0.14);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 1px 0 rgba(183, 255, 90, 0.08);
-  padding: 0.95rem 0;
+  padding-top: max(0.95rem, env(safe-area-inset-top, 0px));
+  padding-bottom: 0.95rem;
 }
 
 .container {
@@ -71,6 +75,15 @@
   transition: var(--transition-smooth);
   position: relative;
   padding: 0.35rem 0;
+}
+
+@media (pointer: coarse) {
+  .navLinks a {
+    padding: 0.65rem 0.5rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
 }
 
 .navLinks a::after {
@@ -137,8 +150,9 @@
 
 @media (max-width: 767px) {
   .langBtn {
-    padding: 0.35rem 0.65rem;
+    padding: 0.35rem 0.8rem;
     gap: 0.3rem;
+    min-height: 2.75rem; /* 44px touch target */
   }
   .langText {
     font-size: 0.72rem;
@@ -173,14 +187,20 @@
   z-index: 120;
   opacity: 0;
   transform: translateY(-8px);
+  /* Fully out of the tab order while closed (like the mobile menu) */
+  visibility: hidden;
   pointer-events: none;
-  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: opacity 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s 0.25s;
 }
 
 .langDropdown.open {
   opacity: 1;
   transform: translateY(0);
+  visibility: visible;
   pointer-events: auto;
+  transition: opacity 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s;
 }
 
 .langOption {
@@ -251,13 +271,16 @@
 }
 
 .mobileToggle {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem; /* 44px touch target */
+  min-height: 2.75rem;
   background: transparent;
   color: var(--text-primary);
   border: none;
   cursor: pointer;
   z-index: 101;
-  padding: 0.4rem;
   transition: color 0.2s ease;
 }
 

@@ -41,20 +41,13 @@
 }
 
 .greeting {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+  display: block;
   font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: var(--accent-green);
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  margin-bottom: 0.75rem;
-  background: rgba(183, 255, 90, 0.06);
-  border: 1px solid rgba(183, 255, 90, 0.2);
-  padding: 0.28rem 0.75rem;
-  border-radius: 4px;
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+  margin-bottom: 0.35rem;
 }
 
 .name {
@@ -141,7 +134,7 @@
 }
 
 .btnPrimary:hover {
-  background: #c8ff7d;
+  background: var(--accent-green-hover);
   box-shadow: 0 0 35px rgba(183, 255, 90, 0.7);
   transform: translateY(-2px);
 }

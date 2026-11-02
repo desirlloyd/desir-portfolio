@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { FiDownload, FiX } from 'react-icons/fi';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { useLanguage } from '../../hooks/useLanguage';
 import cvFrench from '../../assets/CV-DLBJF.pdf';
 import cvEnglish from '../../assets/CV-DLBJE.pdf';
 import styles from './CvDownload.module.css';
@@ -27,13 +27,38 @@ const CvDownload = ({
   const { t } = useLanguage();
   const [open, setOpen] = useState(false);
   const modalRef = useRef(null);
+  const triggerRef = useRef(null);
 
   useEffect(() => {
-    if (!open) return;
+    if (!open) return undefined;
+
+    const triggerEl = triggerRef.current;
+
+    // Move focus into the dialog
+    const modal = modalRef.current;
+    if (modal) modal.focus();
 
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
         setOpen(false);
+        return;
+      }
+      if (event.key !== 'Tab' || !modalRef.current) return;
+
+      // Keep Tab cycling inside the dialog
+      const focusables = modalRef.current.querySelectorAll(
+        'button, [href], input, textarea, select, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
       }
     };
 
@@ -44,13 +69,15 @@ const CvDownload = ({
     };
 
     document.addEventListener('keydown', handleKeyDown);
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('pointerdown', handleClickOutside);
     document.body.style.overflow = 'hidden';
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('pointerdown', handleClickOutside);
       document.body.style.overflow = '';
+      // Return focus to the trigger
+      triggerEl?.focus();
     };
   }, [open]);
 
@@ -70,6 +97,7 @@ const CvDownload = ({
     <>
       <button
         type="button"
+        ref={triggerRef}
         className={className}
         onClick={() => setOpen(true)}
         aria-haspopup="dialog"
@@ -87,6 +115,7 @@ const CvDownload = ({
             role="dialog"
             aria-modal="true"
             aria-labelledby="cv-modal-title"
+            tabIndex={-1}
           >
             <button
               type="button"

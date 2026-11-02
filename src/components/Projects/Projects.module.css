@@ -27,7 +27,8 @@
   font-size: clamp(2rem, 3.8vw, 3rem);
   font-weight: 800;
   color: var(--text-primary);
-  white-space: nowrap;
+  overflow-wrap: break-word;
+  text-wrap: balance;
   letter-spacing: -0.02em;
 }
 
@@ -123,8 +124,17 @@
   transition: opacity 0.25s ease;
 }
 
-.card:hover .overlay {
+.card:hover .overlay,
+.card:focus-within .overlay {
   opacity: 1;
+}
+
+/* Touch devices have no hover: keep the project links reachable and visible */
+@media (hover: none) {
+  .overlay {
+    opacity: 1;
+    background: rgba(8, 11, 10, 0.65);
+  }
 }
 
 .links {

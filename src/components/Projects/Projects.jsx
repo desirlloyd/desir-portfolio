@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import AnimatedText from '../AnimatedText/AnimatedText';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import Typewriter from '../Typewriter/Typewriter';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { useLanguage } from '../../hooks/useLanguage';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 import budgetTrackerImg from '../../assets/budgettracker.png';
 import ginTypeImg from '../../assets/gintype.png';
 import word2pdfImg from '../../assets/word2pdf.png';
@@ -36,7 +36,9 @@ const projectsData = [
 
 const ProjectCard = ({ project, index }) => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
-  
+  const { t } = useLanguage();
+  const reducedMotion = useReducedMotion();
+
   // 3D Tilt Effect State
   const cardRef = useRef(null);
   const x = useMotionValue(0);
@@ -52,7 +54,7 @@ const ProjectCard = ({ project, index }) => {
   const glareY = useTransform(mouseYSpring, [-0.5, 0.5], ["0%", "100%"]);
 
   const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
+    if (reducedMotion || !cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
@@ -71,7 +73,7 @@ const ProjectCard = ({ project, index }) => {
   };
 
   return (
-    <div ref={ref} style={{ perspective: "1500px" }}>
+    <div ref={ref} style={{ perspective: reducedMotion ? 'none' : '1500px' }}>
       <motion.div 
         className={styles.card}
         ref={cardRef}
@@ -81,9 +83,9 @@ const ProjectCard = ({ project, index }) => {
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.6, delay: index * 0.15 }}
         style={{
-          rotateX,
-          rotateY,
-          transformStyle: "preserve-3d"
+          rotateX: reducedMotion ? 0 : rotateX,
+          rotateY: reducedMotion ? 0 : rotateY,
+          transformStyle: reducedMotion ? 'flat' : 'preserve-3d'
         }}
       >
         <motion.div 
@@ -98,11 +100,11 @@ const ProjectCard = ({ project, index }) => {
             <div className={styles.overlay}>
               <div className={styles.links}>
                 {project.github && (
-                  <a href={project.github} target="_blank" rel="noreferrer" className={styles.iconLink} aria-label="Code source">
+                  <a href={project.github} target="_blank" rel="noreferrer" className={styles.iconLink} aria-label={t('projects.sourceCode')}>
                     <FaGithub size={20} />
                   </a>
                 )}
-                <a href={project.live} target="_blank" rel="noreferrer" className={styles.iconLink} aria-label="Voir le projet">
+                <a href={project.live} target="_blank" rel="noreferrer" className={styles.iconLink} aria-label={t('projects.visitSite')}>
                   <FaExternalLinkAlt size={20} />
                 </a>
               </div>
@@ -146,7 +148,7 @@ const Projects = () => {
               key={language}
               segments={t('projects.title').split(' ').map((part, idx, arr) => ({
                 text: part + (idx < arr.length - 1 ? ' ' : ''),
-                className: idx === arr.length - 1 ? 'gradient-text' : ''
+                className: idx === arr.length - 1 ? 'title-accent' : ''
               }))} 
             />
           </h2>

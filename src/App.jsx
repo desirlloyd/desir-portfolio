@@ -1,4 +1,5 @@
 import React from 'react';
+import { MotionConfig } from 'framer-motion';
 import Navbar from './components/Navbar/Navbar';
 import ParticlesBackground from './components/ParticlesBackground/ParticlesBackground';
 import Hero from './components/Hero/Hero';
@@ -11,21 +12,23 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <ParticlesBackground />
-      <Navbar />
-      <main>
-        {/* Independent Hero & About sections with their respective dedicated animations */}
-        <Hero />
-        <About />
+    <MotionConfig reducedMotion="user">
+      <div className="App">
+        <ParticlesBackground />
+        <Navbar />
+        <main>
+          {/* Independent Hero & About sections with their respective dedicated animations */}
+          <Hero />
+          <About />
 
-        {/* Rest of the page continues normally */}
-        <Skills />
-        <Projects />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+          {/* Rest of the page continues normally */}
+          <Skills />
+          <Projects />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
+    </MotionConfig>
   );
 }
 

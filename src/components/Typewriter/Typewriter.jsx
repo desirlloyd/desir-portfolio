@@ -1,25 +1,34 @@
 import React, { useState, useEffect, useRef, Fragment } from 'react';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 /**
  * Reusable Typewriter component.
- * Types the phrase sequentially and stops, leaving a blinking cursor at the end.
- * Supports multiple segments with different classNames (e.g. static text + gradient text).
- * Uses IntersectionObserver to start typing only when it enters the viewport.
+ * Types the phrase once when it enters the viewport, then leaves the
+ * full text in place with a blinking cursor — no perpetual delete/retype
+ * loop (headings must stay readable, not cycle).
+ * Supports multiple segments with different classNames (e.g. static text + accent text).
+ * Cursor styles come from the global .typewriter-* rules in index.css.
  */
 const Typewriter = ({ word, segments, delay = 80 }) => {
   const resolvedSegments = segments || [{ text: word || '', className: '' }];
-  const fullText = resolvedSegments.map(s => s.text).join('');
-  
+  const fullText = resolvedSegments.map((s) => s.text).join('');
+
+  const reducedMotion = useReducedMotion();
+
   const [charIndex, setCharIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [isStarted, setIsStarted] = useState(false);
+  const [isStarted, setIsStarted] = useState(
+    () => reducedMotion || (typeof window !== 'undefined' && !window.IntersectionObserver)
+  );
   const containerRef = useRef(null);
 
+  const textLength = fullText.length;
+  // Derive effective charIndex: under reduced motion, render complete text immediately
+  const effectiveCharIndex = reducedMotion ? textLength : charIndex;
+
+  // Start typing only when the heading enters the viewport
   useEffect(() => {
-    if (typeof window === 'undefined' || !window.IntersectionObserver) {
-      setIsStarted(true);
-      return;
-    }
+    if (reducedMotion || isStarted) return undefined;
+    if (typeof window === 'undefined' || !window.IntersectionObserver) return undefined;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -35,33 +44,31 @@ const Typewriter = ({ word, segments, delay = 80 }) => {
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [reducedMotion, isStarted]);
 
+  // Type once, then stop — the heading stays put after landing
   useEffect(() => {
-    if (!isStarted) return;
+    if (!isStarted || reducedMotion) return undefined;
+    if (charIndex >= textLength) return undefined;
 
-    let timer;
-    if (!isDeleting && charIndex === fullText.length) {
-      timer = setTimeout(() => setIsDeleting(true), 3000); // Pause before deleting
-    } else if (isDeleting && charIndex === 0) {
-      timer = setTimeout(() => setIsDeleting(false), 800); // Pause before typing again
-    } else {
-      timer = setTimeout(() => {
-        setCharIndex(prev => prev + (isDeleting ? -1 : 1));
-      }, isDeleting ? delay / 2 : delay);
-    }
-    
+    const timer = setTimeout(() => {
+      setCharIndex((prev) => prev + 1);
+    }, delay);
+
     return () => clearTimeout(timer);
-  }, [charIndex, isDeleting, fullText, delay, isStarted]);
+  }, [charIndex, isStarted, textLength, delay, reducedMotion]);
 
-  // Distribute the current typed characters across the segments
-  let remainingChars = charIndex;
+  // Distribute the typed characters across the segments immutably
   const renderedElements = resolvedSegments.map((segment, idx) => {
-    if (remainingChars <= 0) return null;
-    
-    const textLength = segment.text.length;
-    const textToRender = segment.text.substring(0, remainingChars);
-    remainingChars -= textLength;
+    // Start index in fullText of this segment
+    const startOffset = resolvedSegments
+      .slice(0, idx)
+      .reduce((sum, s) => sum + s.text.length, 0);
+
+    if (effectiveCharIndex <= startOffset) return null;
+
+    const charsInThisSegment = Math.min(effectiveCharIndex - startOffset, segment.text.length);
+    const textToRender = segment.text.substring(0, charsInThisSegment);
 
     if (segment.className) {
       return (
@@ -77,22 +84,6 @@ const Typewriter = ({ word, segments, delay = 80 }) => {
     <span ref={containerRef} className="typewriter-container">
       {renderedElements}
       <span className="typewriter-cursor">_</span>
-      <style>{`
-        .typewriter-container {
-          display: inline-block;
-          white-space: nowrap;
-        }
-        .typewriter-cursor {
-          display: inline-block;
-          margin-left: 2px;
-          animation: typewriterBlink 0.6s step-end infinite;
-          color: inherit;
-        }
-        @keyframes typewriterBlink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
-        }
-      `}</style>
     </span>
   );
 };

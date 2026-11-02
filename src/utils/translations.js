@@ -6,7 +6,9 @@ export const translations = {
       experience: "Parcours",
       skills: "Compétences",
       projects: "Projets",
-      contact: "Contact"
+      contact: "Contact",
+      menu: "Menu",
+      changeLanguage: "Changer de langue"
     },
     hero: {
       greeting: "Bonjour, je suis",
@@ -49,6 +51,8 @@ export const translations = {
     },
     projects: {
       title: "Mes Projets",
+      sourceCode: "Code source",
+      visitSite: "Voir le projet",
       items: [
         {
           title: "BudgetTracker",
@@ -125,7 +129,9 @@ export const translations = {
       experience: "Journey",
       skills: "Skills",
       projects: "Projects",
-      contact: "Contact"
+      contact: "Contact",
+      menu: "Menu",
+      changeLanguage: "Change language"
     },
     hero: {
       greeting: "Hello, I am",
@@ -168,6 +174,8 @@ export const translations = {
     },
     projects: {
       title: "My Projects",
+      sourceCode: "Source code",
+      visitSite: "Visit project",
       items: [
         {
           title: "BudgetTracker",
@@ -244,7 +252,9 @@ export const translations = {
       experience: "Parkou",
       skills: "Konpetans",
       projects: "Pwojè",
-      contact: "Kontak"
+      contact: "Kontak",
+      menu: "Meni",
+      changeLanguage: "Chanje lang"
     },
     hero: {
       greeting: "Bonjou, mwen se",
@@ -287,6 +297,8 @@ export const translations = {
     },
     projects: {
       title: "Pwojè Mwen yo",
+      sourceCode: "Kòd sous",
+      visitSite: "Ale sou pwojè a",
       items: [
         {
           title: "BudgetTracker",

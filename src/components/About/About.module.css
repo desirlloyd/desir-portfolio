@@ -26,7 +26,8 @@
   font-size: clamp(2rem, 3.8vw, 3rem);
   font-weight: 800;
   color: var(--text-primary);
-  white-space: nowrap;
+  overflow-wrap: break-word;
+  text-wrap: balance;
   letter-spacing: -0.025em;
 }
 
@@ -82,6 +83,7 @@
   line-height: 1.8;
   letter-spacing: -0.012em;
   margin-bottom: 1.25rem;
+  max-width: 640px; /* ~65 average characters in Sora (its ch unit is wide) */
   text-wrap: pretty;
 }
 

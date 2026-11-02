@@ -6,7 +6,7 @@ import Typewriter from '../Typewriter/Typewriter';
 import Magnetic from '../Magnetic/Magnetic';
 import CvDownload from '../CvDownload/CvDownload';
 import { useCountUp } from '../../hooks/useCountUp';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { useLanguage } from '../../hooks/useLanguage';
 import styles from './About.module.css';
 
 // Individual stat box with count-up animation
@@ -50,7 +50,7 @@ const About = () => {
               key={language}
               segments={t('about.title').split(' ').map((part, idx, arr) => ({
                 text: part + (idx < arr.length - 1 ? ' ' : ''),
-                className: idx === arr.length - 1 ? 'gradient-text' : ''
+                className: idx === arr.length - 1 ? 'title-accent' : ''
               }))}
             />
           </h2>

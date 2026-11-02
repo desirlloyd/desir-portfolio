@@ -26,6 +26,10 @@
     width: 220px;
     height: 220px;
   }
+
+  .coords {
+    display: none; /* HUD row wraps onto the corner brackets at this width */
+  }
 }
 
 /* ── HUD Corner Tech Accents ─────────────────────────────── */
@@ -317,9 +321,11 @@
   opacity: 0;
 }
 
-.stabilized .specularSheen {
-  animation: specularSweep 7.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  animation-delay: 0.8s;
+@media (prefers-reduced-motion: no-preference) {
+  .stabilized .specularSheen {
+    animation: specularSweep 7.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation-delay: 0.8s;
+  }
 }
 
 @keyframes specularSweep {

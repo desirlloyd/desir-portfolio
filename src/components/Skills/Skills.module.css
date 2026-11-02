@@ -31,7 +31,8 @@
   font-size: clamp(2rem, 3.8vw, 3rem);
   font-weight: 800;
   color: var(--text-primary);
-  white-space: nowrap;
+  overflow-wrap: break-word;
+  text-wrap: balance;
   letter-spacing: -0.02em;
 }
 
@@ -52,6 +53,8 @@
   overflow: hidden;
   backdrop-filter: blur(12px);
   box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.8), 0 16px 40px rgba(0, 0, 0, 0.5);
+  touch-action: pan-y;
+  contain: layout paint;
   /* Cybernetic radar coordinate grid */
   background-image: 
     radial-gradient(circle at 50% 50%, rgba(183, 255, 90, 0.04) 0%, transparent 60%),
@@ -178,7 +181,7 @@
   box-shadow: 0 0 12px rgba(125, 232, 255, 0.1);
 }
 .nodeInfra:hover {
-  border-color: #7DE8FF;
+  border-color: var(--accent-cyan);
   box-shadow: 0 0 24px rgba(125, 232, 255, 0.45);
 }
 

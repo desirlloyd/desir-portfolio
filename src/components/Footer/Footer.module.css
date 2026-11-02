@@ -47,7 +47,7 @@
   }
 }
 
-.brand h3 {
+.brandTitle {
   font-family: var(--font-mono);
   font-size: 1.35rem;
   font-weight: 700;
@@ -109,16 +109,4 @@
     flex-direction: row;
     justify-content: space-between;
   }
-}
-
-.heart {
-  color: var(--accent-green);
-  display: inline-block;
-  animation: pulse 2s infinite ease-in-out;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
 }

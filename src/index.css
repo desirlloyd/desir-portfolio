@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Sora:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&family=Syne:wght@700;800&display=swap');
-
 :root {
   /* GINKTIK.OS Color Palette */
   --bg-color: #080B0A;
@@ -8,14 +6,22 @@
   --surface-elevated: #18241E;
   --surface-hover: #1D2C24;
 
+  /* Text hierarchy — primary ≥12:1, secondary ≥8:1, muted ≥5:1 on --bg-color */
+  --text-primary: #F0F4EF;
+  --text-secondary: rgba(240, 244, 239, 0.72);
+  --text-muted: rgba(240, 244, 239, 0.58);
+
   /* Accents */
   --accent-green: #B7FF5A;
   --accent-amber: #FFB454;
+  --accent-cyan: #7DE8FF;
   --accent-green-glow: rgba(183, 255, 90, 0.25);
   --accent-amber-glow: rgba(255, 180, 84, 0.25);
 
-  /* Fallback aliases for any component referencing cyan / purple */
-  --accent-cyan: #B7FF5A;
+  /* Interaction states */
+  --accent-green-hover: #C8FF7D;
+
+  /* Fallback alias for any component referencing purple */
   --accent-purple: #FFB454;
 
   /* Distinctive Cyber-Technologist Typography Triad */
@@ -77,6 +83,18 @@ html {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Keyboard focus — visible everywhere; inputs/textareas keep their themed field ring */
+:focus-visible {
+  outline: 2px solid var(--accent-green);
+  outline-offset: 3px;
+}
+
 body {
   background-color: var(--bg-color);
   color: var(--text-primary);
@@ -86,12 +104,21 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
   /* Discreet technical grid pattern */
   background-image: 
     linear-gradient(to right, rgba(183, 255, 90, 0.025) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(183, 255, 90, 0.025) 1px, transparent 1px);
   background-size: 44px 44px;
   background-attachment: fixed;
+}
+
+/* Mobile: repaint cost of fixed backgrounds is high while scrolling */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
 }
 
 /* Custom Scrollbar */
@@ -138,6 +165,11 @@ button {
   background: none;
 }
 
+/* Accent word in section headings (weight/size carry the hierarchy; single accent hue) */
+.title-accent {
+  color: var(--accent-green);
+}
+
 /* Reusable Utility Classes */
 .gradient-text {
   background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-amber) 100%);
@@ -161,14 +193,27 @@ button {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
 }
 
-.cursor {
+/* Typewriter cursor (single global definition, deduplicated per-instance styles) */
+.typewriter-container {
   display: inline-block;
-  margin-left: 2px;
-  animation: blink 0.7s step-end infinite;
-  color: var(--accent-green);
+  white-space: nowrap;
 }
 
-@keyframes blink {
+.typewriter-cursor {
+  display: inline-block;
+  margin-left: 2px;
+  color: inherit;
+  animation: typewriterBlink 0.6s step-end infinite;
+}
+
+@keyframes typewriterBlink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typewriter-cursor {
+    animation: none;
+    opacity: 0.9;
+  }
 }

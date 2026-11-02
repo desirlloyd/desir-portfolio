@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-01T20:22:00.000Z",
+  "title": "Design System: GINKTIK.OS",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Phosphor Green",
+        "canonical": "#B7FF5A",
+        "tonalRamp": [
+          "#102606",
+          "#1E480C",
+          "#367A18",
+          "#55B329",
+          "#76EC3C",
+          "#B7FF5A",
+          "#D5FFA3",
+          "#EDFFD7"
+        ]
+      },
+      "secondary": {
+        "role": "secondary",
+        "displayName": "Amber Warning",
+        "canonical": "#FFB454",
+        "tonalRamp": [
+          "#281703",
+          "#4B2D08",
+          "#7C4C0F",
+          "#BA761C",
+          "#FFA333",
+          "#FFB454",
+          "#FFD299",
+          "#FFEEDB"
+        ]
+      },
+      "tertiary": {
+        "role": "tertiary",
+        "displayName": "Cyan Signal",
+        "canonical": "#7DE8FF",
+        "tonalRamp": [
+          "#052026",
+          "#0C404C",
+          "#176B7E",
+          "#2CA5BF",
+          "#52D0EC",
+          "#7DE8FF",
+          "#B5F3FF",
+          "#E3FBFF"
+        ]
+      },
+      "neutral-bg": {
+        "role": "neutral",
+        "displayName": "Obsidian Base",
+        "canonical": "#080B0A",
+        "tonalRamp": [
+          "#040505",
+          "#080B0A",
+          "#101613",
+          "#141D19",
+          "#1D2C24",
+          "#283E33",
+          "#3C5A4B",
+          "#658D79"
+        ]
+      },
+      "surface-dark": {
+        "role": "neutral",
+        "displayName": "Surface Dark",
+        "canonical": "#101613"
+      },
+      "text-primary": {
+        "role": "neutral",
+        "displayName": "Crisp Light",
+        "canonical": "#F0F4EF"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display Brand",
+        "purpose": "Hero title and personal branding signatures."
+      },
+      "headline": {
+        "displayName": "Section Headline",
+        "purpose": "Major section headings accompanied by typewriter animation."
+      },
+      "title": {
+        "displayName": "Component Title",
+        "purpose": "Project cards, modal headings, and dialog banners."
+      },
+      "body": {
+        "displayName": "Editorial Body",
+        "purpose": "Bio paragraphs, narrative descriptions, and card summaries."
+      },
+      "label": {
+        "displayName": "Telemetry & Controls",
+        "purpose": "Navigation anchors, buttons, HUD tags, and coordinate metrics."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card-rest",
+        "value": "0 12px 30px rgba(0, 0, 0, 0.5)",
+        "purpose": "Default resting shadow for elevated glass cards."
+      },
+      {
+        "name": "card-hover",
+        "value": "0 20px 45px rgba(0, 0, 0, 0.8), 0 0 24px rgba(183, 255, 90, 0.2)",
+        "purpose": "Hover lift state with soft phosphor green back-glow."
+      },
+      {
+        "name": "phosphor-glow",
+        "value": "0 0 20px rgba(183, 255, 90, 0.35)",
+        "purpose": "High-intensity active phosphor glow on primary CTAs."
+      },
+      {
+        "name": "modal-depth",
+        "value": "0 24px 70px rgba(0, 0, 0, 0.9), 0 0 30px rgba(183, 255, 90, 0.15)",
+        "purpose": "Floating dialog elevation over backdrop scrim."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-smooth",
+        "value": "cubic-bezier(0.2, 0.8, 0.2, 1)",
+        "purpose": "Standard interactive transitions for hover and layout shifts."
+      },
+      {
+        "name": "biometric-sweep",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "Vertical scanning cycle for HUD telemetry overlays."
+      }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "480px" },
+      { "name": "tablet", "value": "768px" },
+      { "name": "desktop", "value": "992px" },
+      { "name": "wide", "value": "1200px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "High-visibility primary call-to-action with phosphor radiance.",
+      "html": "<button class=\"ds-btn-primary\">VOIR LES PROJETS</button>",
+      "css": ".ds-btn-primary { background: #B7FF5A; color: #080B0A; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.8rem 1.8rem; border-radius: 6px; border: 1px solid #B7FF5A; box-shadow: 0 0 20px rgba(183, 255, 90, 0.35); cursor: pointer; transition: all 0.25s ease; } .ds-btn-primary:hover { background: #C8FF7D; box-shadow: 0 0 35px rgba(183, 255, 90, 0.7); transform: translateY(-2px); }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Refined dark button with luminous phosphor perimeter line.",
+      "html": "<button class=\"ds-btn-secondary\">TÉLÉCHARGER CV</button>",
+      "css": ".ds-btn-secondary { background: #101613; color: #B7FF5A; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.8rem 1.8rem; border-radius: 6px; border: 1px solid rgba(183, 255, 90, 0.45); cursor: pointer; transition: all 0.25s ease; } .ds-btn-secondary:hover { background: rgba(183, 255, 90, 0.1); box-shadow: 0 0 20px rgba(183, 255, 90, 0.3); transform: translateY(-2px); }"
+    },
+    {
+      "name": "Skill Chip Tag",
+      "kind": "chip",
+      "refersTo": "chip-tag",
+      "description": "Phosphor-accented taxonomy badge for frameworks and languages.",
+      "html": "<span class=\"ds-chip-tag\">React.js</span>",
+      "css": ".ds-chip-tag { display: inline-flex; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; padding: 0.28rem 0.65rem; border-radius: 4px; background: rgba(183, 255, 90, 0.06); color: #B7FF5A; border: 1px solid rgba(183, 255, 90, 0.2); transition: all 0.2s ease; } .ds-chip-tag:hover { background: rgba(183, 255, 90, 0.15); border-color: #B7FF5A; }"
+    },
+    {
+      "name": "Project Card",
+      "kind": "card",
+      "refersTo": "card-project",
+      "description": "Obsidian glass container housing project screenshots, details, and live links.",
+      "html": "<div class=\"ds-card-project\"><h3 class=\"ds-card-title\">// BudgetTracker</h3><p class=\"ds-card-desc\">Application web de gestion de budget personnel avec graphiques de tendances.</p><div class=\"ds-card-tags\"><span class=\"ds-chip-tag\">React</span><span class=\"ds-chip-tag\">Vite</span></div></div>",
+      "css": ".ds-card-project { background: #101613; border: 1px solid rgba(183, 255, 90, 0.14); border-radius: 12px; padding: 1.6rem; color: #F0F4EF; font-family: 'Sora', sans-serif; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5); transition: all 0.3s ease; } .ds-card-project:hover { border-color: #B7FF5A; transform: translateY(-4px); box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 24px rgba(183, 255, 90, 0.2); } .ds-card-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 700; color: #F0F4EF; margin-bottom: 0.7rem; } .ds-card-desc { font-size: 0.92rem; color: rgba(240, 244, 239, 0.72); line-height: 1.6; margin-bottom: 1.2rem; } .ds-card-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }"
+    },
+    {
+      "name": "Terminal Input Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "High-contrast dark form control with phosphor focus illumination.",
+      "html": "<input type=\"text\" class=\"ds-input-field\" placeholder=\"Votre nom...\" />",
+      "css": ".ds-input-field { width: 100%; padding: 0.9rem 1.1rem; background: #080B0A; border: 1px solid rgba(183, 255, 90, 0.14); border-radius: 6px; color: #F0F4EF; font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; outline: none; transition: all 0.25s ease; box-sizing: border-box; } .ds-input-field:focus { border-color: #B7FF5A; box-shadow: 0 0 16px rgba(183, 255, 90, 0.2); background: #0b100d; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Cybernetic Diagnostic Console",
+    "overview": "GINKTIK.OS is a high-density, technical portfolio interface conceived as an operational diagnostic workstation. The visual world balances terminal precision with purposeful cybernetic telemetry: HUD reticles, scanning beams, optical calibration overlays, and floating network topologies. Instead of decorative sci-fi pastiche, every visual cue suggests calibrated hardware telemetry, telemetry coordinates, and verified system states.\n\nThe tone is rigorous, confident, and unapologetically dark-mode native. Surfaces are composed of deep Obsidian and carbon tiers, elevated by surgical phosphor green (#B7FF5A) and warm warning amber (#FFB454) accents. Contrast is uncompromisingly sharp to provide immediate readability across multi-viewport devices.",
+    "keyCharacteristics": [
+      "Deep Obsidian terminal background (#080B0A) with subtle 44px coordinate grid texture.",
+      "Phosphor green primary accent (#B7FF5A) delivering AAA contrast ratio (>15:1) against dark surfaces.",
+      "Tri-font typographic system: Syne for impactful branding, Space Grotesk for technical headings, Sora for editorial bio body, and JetBrains Mono for telemetry metrics and controls.",
+      "Full motion respect: hardware-accelerated animations gracefully settle into static composed layouts under prefers-reduced-motion: reduce.",
+      "Resilient multi-language support (French, English, Haitian Creole) with persistent client-side state."
+    ],
+    "rules": [
+      {
+        "name": "The Rarity of Phosphor Rule",
+        "body": "Phosphor green (#B7FF5A) covers less than 8% of the surface area at any time. Its power stems from selective contrast against deep obsidian.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ghost Token Prohibition",
+        "body": "Never use raw hex codes directly in component rules; all color references resolve to CSS custom properties declared on :root.",
+        "section": "colors"
+      },
+      {
+        "name": "The 65-Character Ceiling",
+        "body": "Body prose never spans wider than 640px (approximately 65 characters in Sora) to preserve effortless reading scanning.",
+        "section": "typography"
+      },
+      {
+        "name": "The Mono Affirmation",
+        "body": "JetBrains Mono is strictly reserved for data, coordinates, status markers, tags, and navigation anchors—never for narrative body copy.",
+        "section": "typography"
+      },
+      {
+        "name": "The Luminous Border Doctrine",
+        "body": "Depth is defined primarily by 1px subtle borders (rgba(183, 255, 90, 0.14)) and background value steps, never by diffuse opaque drop shadows.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do wrap every interactive button and link with explicit 44x44px minimum touch target dimensions on touch and coarse-pointer devices.",
+      "Do test all copy against all three supported languages (French, English, Haitian Creole) to ensure flex and grid containers accommodate text expansion without layout breaking.",
+      "Do preserve the settled static state for all animations when prefers-reduced-motion: reduce is active.",
+      "Do route all new colors through CSS variables defined on :root."
+    ],
+    "donts": [
+      "Don't use pure saturated blues or purples; the system palette is anchored strictly in Phosphor Green (#B7FF5A), Amber Warning (#FFB454), and Cyan Signal (#7DE8FF).",
+      "Don't set white-space: nowrap on responsive section headings or card titles; use text-wrap: balance and overflow-wrap: break-word.",
+      "Don't use heavy drop shadows on flat surfaces; elevation is conveyed through luminance tiering and 1px border definition.",
+      "Don't allow form input font sizes below 16px on mobile viewports to avoid triggering iOS Safari auto-zooming."
+    ]
+  }
+}

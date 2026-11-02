@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 import Typewriter from '../Typewriter/Typewriter';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { useLanguage } from '../../hooks/useLanguage';
 import { sendContactMessage } from '../../utils/sendContactMessage';
 import styles from './Contact.module.css';
 
@@ -22,10 +22,20 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const name = formData.name.trim();
+    const email = formData.email.trim();
+    const message = formData.message.trim();
+
+    if (!name || !email || !message) {
+      setStatus('error');
+      return;
+    }
+
     setStatus('sending');
 
     try {
-      await sendContactMessage(formData);
+      await sendContactMessage({ name, email, message });
       setStatus('success');
       setFormData({ name: '', email: '', message: '' });
     } catch {
@@ -43,7 +53,7 @@ const Contact = () => {
               key={language}
               segments={t('contact.title').split(' ').map((part, idx, arr) => ({
                 text: part + (idx < arr.length - 1 ? ' ' : ''),
-                className: idx === arr.length - 1 ? 'gradient-text' : ''
+                className: idx === arr.length - 1 ? 'title-accent' : ''
               }))} 
             />
           </h2>
@@ -93,6 +103,8 @@ const Contact = () => {
                 value={formData.name} 
                 onChange={handleChange} 
                 required 
+                maxLength={100}
+                autoComplete="name"
                 placeholder={t('contact.form.placeholderName')}
               />
             </div>
@@ -105,6 +117,8 @@ const Contact = () => {
                 value={formData.email} 
                 onChange={handleChange} 
                 required 
+                maxLength={254}
+                autoComplete="email"
                 placeholder={t('contact.form.placeholderEmail')}
               />
             </div>
@@ -116,6 +130,7 @@ const Contact = () => {
                 value={formData.message} 
                 onChange={handleChange} 
                 required 
+                maxLength={3000}
                 placeholder={t('contact.form.placeholderMessage')}
                 rows="5"
               ></textarea>
@@ -129,13 +144,13 @@ const Contact = () => {
             </button>
 
             {status === 'success' && (
-              <p className={`${styles.formStatus} ${styles.success}`} role="status">
+              <p className={`${styles.formStatus} ${styles.success}`} role="status" aria-live="polite">
                 {t('contact.form.success')}
               </p>
             )}
 
             {status === 'error' && (
-              <p className={`${styles.formStatus} ${styles.error}`} role="alert">
+              <p className={`${styles.formStatus} ${styles.error}`} role="alert" aria-live="assertive">
                 {t('contact.form.error')}
               </p>
             )}
