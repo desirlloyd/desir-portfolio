@@ -17,7 +17,7 @@ const Footer = () => {
           </div>
           
           <div className={styles.socials}>
-            <a href="https://github.com/lloyddesir" target="_blank" rel="noreferrer" aria-label="GitHub">
+            <a href="https://github.com/desirlloyd" target="_blank" rel="noreferrer" aria-label="GitHub">
               <FaGithub size={24} />
             </a>
             <a href="https://www.linkedin.com/in/lloyd-b-j-desir-5a24b83b7/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
