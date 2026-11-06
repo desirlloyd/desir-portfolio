@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import AboutHoloPhoto from './AboutHoloPhoto';
 import Typewriter from '../Typewriter/Typewriter';
 import Magnetic from '../Magnetic/Magnetic';
 import CvDownload from '../CvDownload/CvDownload';
@@ -25,10 +24,9 @@ const StatCard = ({ stat }) => {
 /**
  * About Section
  * 
- * Standalone About section with independent AboutHoloPhoto.
+ * Standalone About section.
  * Features:
- *  - Holographic stabilization animation on the profile photo
- *  - Responsive grid layout preserving proportions
+ *  - Responsive layout preserving proportions
  *  - Multi-language content, typewriter header, and count-up stats
  */
 const About = () => {
@@ -58,22 +56,12 @@ const About = () => {
         </div>
 
         <div className={styles.content}>
-          {/* Left: Independent Profile Photo with Holographic Stabilization */}
-          <motion.div
-            className={styles.photoWrapper}
-            initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-            transition={{ duration: 0.7 }}
-          >
-            <AboutHoloPhoto />
-          </motion.div>
-
-          {/* Right: Bio Text and Metrics */}
+          {/* Bio Text and Metrics */}
           <motion.div
             className={styles.textContent}
-            initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
+            initial={{ opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+            transition={{ duration: 0.7 }}
           >
             <h3 className={styles.subtitle}>
               {t('about.subtitle')}

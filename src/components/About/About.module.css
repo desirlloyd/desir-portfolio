@@ -40,29 +40,12 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: 3.5rem;
-  align-items: center;
-}
-
-@media (min-width: 992px) {
-  .content {
-    flex-direction: row;
-    align-items: flex-start;
-  }
-}
-
-/* ─── PHOTO ─── */
-.photoWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
 }
 
 /* ─── TEXT ─── */
 .textContent {
-  flex: 1;
   width: 100%;
+  max-width: 820px;
 }
 
 .subtitle {
@@ -83,7 +66,7 @@
   line-height: 1.8;
   letter-spacing: -0.012em;
   margin-bottom: 1.25rem;
-  max-width: 640px; /* ~65 average characters in Sora (its ch unit is wide) */
+  max-width: 720px;
   text-wrap: pretty;
 }
 
@@ -94,6 +77,7 @@
   gap: 1.25rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
+  max-width: 620px;
 }
 
 .statBox {
@@ -136,12 +120,6 @@
 .ctaRow {
   display: flex;
   margin-top: 1rem;
-}
-
-@media (max-width: 991px) {
-  .ctaRow {
-    justify-content: center;
-  }
 }
 
 .downloadBtn {
