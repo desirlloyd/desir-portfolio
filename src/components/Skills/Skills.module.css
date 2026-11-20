@@ -193,3 +193,36 @@
   border-color: var(--text-primary);
   box-shadow: 0 0 24px rgba(240, 244, 239, 0.3);
 }
+
+/* Active & Connected Network Glow Effects */
+.lineActive {
+  stroke: var(--accent-green) !important;
+  stroke-width: 2.2 !important;
+  stroke-dasharray: none !important;
+  opacity: 1 !important;
+  filter: drop-shadow(0 0 6px rgba(183, 255, 90, 0.7));
+  transition: opacity 0.2s ease, stroke-width 0.2s ease;
+}
+
+.lineDimmed {
+  opacity: 0.12 !important;
+  transition: opacity 0.2s ease;
+}
+
+.nodeDimmed {
+  opacity: 0.45;
+  transition: opacity 0.2s ease;
+}
+
+.nodeConnected {
+  border-color: var(--accent-green) !important;
+  box-shadow: 0 0 20px rgba(183, 255, 90, 0.45) !important;
+  background-color: #17241e !important;
+}
+
+.nodeHovered {
+  border-color: var(--accent-green) !important;
+  box-shadow: 0 0 28px rgba(183, 255, 90, 0.7) !important;
+  background-color: var(--surface-elevated) !important;
+  z-index: 50 !important;
+}

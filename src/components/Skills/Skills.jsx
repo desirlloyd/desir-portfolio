@@ -1,8 +1,9 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { 
   FaHtml5, FaJs, FaPhp, FaPython, FaDatabase, FaBrain, FaWindows, FaServer, FaNetworkWired, FaFileWord, FaFileExcel, FaReact 
 } from 'react-icons/fa';
-import { SiNextdotjs, SiVite, SiVuedotjs, SiAngular, SiTailwindcss } from 'react-icons/si';
+import { SiNextdotjs, SiVite, SiVuedotjs, SiAngular, SiTailwindcss, SiSupabase } from 'react-icons/si';
+import { TbBrandReactNative } from 'react-icons/tb';
 import Typewriter from '../Typewriter/Typewriter';
 import { useLanguage } from '../../hooks/useLanguage';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
@@ -10,19 +11,37 @@ import styles from './Skills.module.css';
 
 // Connections between related skills
 const connections = [
+  // Web core
   { from: 'html_css', to: 'js' },
   { from: 'html_css', to: 'tailwind' },
   { from: 'js', to: 'react' },
   { from: 'js', to: 'vue' },
   { from: 'js', to: 'angular' },
-  { from: 'react', to: 'next' },
-  { from: 'react', to: 'vite' },
-  { from: 'vue', to: 'vite' },
-  { from: 'react', to: 'tailwind' },
+  { from: 'js', to: 'react_native' },
+  { from: 'js', to: 'supabase' },
   { from: 'js', to: 'php' },
+
+  // React & Fullstack Mobile ecosystem
+  { from: 'react', to: 'next' },
+  { from: 'react', to: 'react_native' },
+  { from: 'react', to: 'supabase' },
+  { from: 'react', to: 'vite' },
+  { from: 'react', to: 'tailwind' },
+  { from: 'react_native', to: 'supabase' },
+  { from: 'react_native', to: 'tailwind' },
+  { from: 'react_native', to: 'vite' },
+
+  // Supabase & Backend / DB ecosystem
+  { from: 'sql', to: 'supabase' },
+  { from: 'next', to: 'supabase' },
+  { from: 'python', to: 'supabase' },
+  { from: 'php', to: 'supabase' },
+  { from: 'vue', to: 'vite' },
   { from: 'php', to: 'sql' },
   { from: 'python', to: 'sql' },
   { from: 'python', to: 'prompt' },
+
+  // Infrastructure & Systems
   { from: 'windows', to: 'win_server' },
   { from: 'win_server', to: 'net_admin' },
   { from: 'windows', to: 'net_admin' },
@@ -36,6 +55,8 @@ const SKILLS_DATA = [
   { id: 'html_css', name: 'HTML, CSS', category: 'web', icon: <FaHtml5 color="#E34F26" />, className: styles.nodeWeb },
   { id: 'js', name: 'JavaScript', category: 'web', icon: <FaJs color="#F7DF1E" />, className: styles.nodeWeb },
   { id: 'react', name: 'React.js', category: 'web', icon: <FaReact color="#61DAFB" />, className: styles.nodeWeb },
+  { id: 'react_native', name: 'React Native', category: 'web', icon: <TbBrandReactNative size={20} strokeWidth={2.2} color="#61DAFB" />, className: styles.nodeWeb },
+  { id: 'supabase', name: 'Supabase', category: 'web', icon: <SiSupabase size={18} color="#3ECF8E" />, className: styles.nodeWeb },
   { id: 'next', name: 'Next.js', category: 'web', icon: <SiNextdotjs color="#FFFFFF" />, className: styles.nodeWeb },
   { id: 'vite', name: 'Vite', category: 'web', icon: <SiVite color="#646CFF" />, className: styles.nodeWeb },
   { id: 'vue', name: 'Vue', category: 'web', icon: <SiVuedotjs color="#4FC08D" />, className: styles.nodeWeb },
@@ -59,6 +80,7 @@ const Skills = () => {
   const containerRef = useRef(null);
   const nodeRefs = useRef({});
   const lineRefs = useRef([]);
+  const [hoveredNode, setHoveredNode] = useState(null);
 
   // Localized skill labels
   const netAdminText = currentLang === 'ht' ? 'Administrasyon Rezo' : (currentLang === 'en' ? 'Network Administration' : 'Administration Réseau');
@@ -318,28 +340,44 @@ const Skills = () => {
                 <stop offset="100%" stopColor="rgba(255, 180, 84, 0.28)" />
               </linearGradient>
             </defs>
-            {connections.map((conn, idx) => (
-              <line
-                key={idx}
-                ref={el => lineRefs.current[idx] = el}
-                stroke="url(#line-grad)"
-                strokeWidth="1.5"
-                strokeDasharray="4 4"
-              />
-            ))}
+            {connections.map((conn, idx) => {
+              const isConnected = hoveredNode ? (conn.from === hoveredNode || conn.to === hoveredNode) : false;
+              const isDimmed = hoveredNode ? !isConnected : false;
+
+              return (
+                <line
+                  key={`${conn.from}-${conn.to}-${idx}`}
+                  ref={el => lineRefs.current[idx] = el}
+                  stroke={isConnected ? "var(--accent-green)" : "url(#line-grad)"}
+                  strokeWidth={isConnected ? "2.2" : "1.5"}
+                  strokeDasharray={isConnected ? "none" : "4 4"}
+                  className={isConnected ? styles.lineActive : (isDimmed ? styles.lineDimmed : '')}
+                />
+              );
+            })}
           </svg>
 
           {/* Floating Skill Node Circles */}
-          {SKILLS_DATA.map((skill) => (
-            <div
-              key={skill.id}
-              ref={el => nodeRefs.current[skill.id] = el}
-              className={`${styles.skillNode} ${skill.className}`}
-            >
-              <span className={styles.icon}>{skill.icon}</span>
-              <span>{getSkillLabel(skill)}</span>
-            </div>
-          ))}
+          {SKILLS_DATA.map((skill) => {
+            const isHovered = hoveredNode === skill.id;
+            const isConnectedNeighbor = hoveredNode && connections.some(
+              c => (c.from === hoveredNode && c.to === skill.id) || (c.to === hoveredNode && c.from === skill.id)
+            );
+            const isDimmed = hoveredNode && !isHovered && !isConnectedNeighbor;
+
+            return (
+              <div
+                key={skill.id}
+                ref={el => nodeRefs.current[skill.id] = el}
+                className={`${styles.skillNode} ${skill.className} ${isHovered ? styles.nodeHovered : ''} ${isConnectedNeighbor ? styles.nodeConnected : ''} ${isDimmed ? styles.nodeDimmed : ''}`}
+                onMouseEnter={() => setHoveredNode(skill.id)}
+                onMouseLeave={() => setHoveredNode(null)}
+              >
+                <span className={styles.icon}>{skill.icon}</span>
+                <span>{getSkillLabel(skill)}</span>
+              </div>
+            );
+          })}
         </div>
 
 

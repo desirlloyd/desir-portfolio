@@ -1,0 +1,255 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(5, 8, 7, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  max-height: 94vh;
+  background: #0b0f0e;
+  border: 1px solid rgba(183, 255, 90, 0.25);
+  border-radius: 18px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.9), 0 0 40px rgba(183, 255, 90, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 1.2rem;
+  border-bottom: 1px solid rgba(183, 255, 90, 0.12);
+  background: rgba(14, 20, 18, 0.8);
+}
+
+.headerInfo {
+  display: flex;
+  align-items: center;
+}
+
+.projectBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--accent-green);
+  font-weight: 600;
+}
+
+.badgeSeparator {
+  opacity: 0.4;
+}
+
+.screenCounter {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.closeBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.closeBtn:hover {
+  background: rgba(255, 75, 75, 0.15);
+  border-color: #ff4b4b;
+  color: #ff4b4b;
+  transform: scale(1.05);
+}
+
+/* Viewer Container */
+.viewerContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem 0.5rem 0.8rem;
+}
+
+/* Navigation Buttons */
+.navBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(11, 15, 14, 0.85);
+  border: 1px solid rgba(183, 255, 90, 0.35);
+  color: var(--accent-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  flex-shrink: 0;
+}
+
+.navBtn:hover {
+  background: var(--accent-green);
+  color: #080B0A;
+  box-shadow: 0 0 20px rgba(183, 255, 90, 0.5);
+  transform: scale(1.1);
+}
+
+.prevBtn {
+  margin-right: 1rem;
+}
+
+.nextBtn {
+  margin-left: 1rem;
+}
+
+/* Phone Frame Mockup - Exactly matches image dimensions (253 x 555) */
+.phoneFrame {
+  position: relative;
+  height: min(60vh, 520px);
+  aspect-ratio: 253 / 555;
+  width: auto;
+  border-radius: 16px;
+  border: 2px solid rgba(183, 255, 90, 0.35);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9), 0 0 20px rgba(183, 255, 90, 0.15);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #080B0A;
+  flex-shrink: 0;
+}
+
+.screenshotImg {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+}
+
+/* Details Area */
+.detailsArea {
+  padding: 0.6rem 1.4rem;
+  background: rgba(14, 20, 18, 0.6);
+  border-top: 1px solid rgba(183, 255, 90, 0.1);
+  text-align: center;
+}
+
+.screenTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 0.25rem;
+}
+
+.screenIndexPill {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  background: rgba(183, 255, 90, 0.15);
+  color: var(--accent-green);
+  border: 1px solid rgba(183, 255, 90, 0.3);
+  padding: 0.12rem 0.45rem;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.screenTitle {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.screenDesc {
+  font-family: var(--font-main);
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  margin: 0;
+  max-width: 440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Navigation Dots */
+.navDotsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 0.85rem 1.2rem;
+  background: #060908;
+  border-top: 1px solid rgba(183, 255, 90, 0.08);
+}
+
+.navDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.navDot:hover {
+  background: rgba(183, 255, 90, 0.6);
+  transform: scale(1.2);
+}
+
+.navDotActive {
+  background: var(--accent-green);
+  border-color: var(--accent-green);
+  width: 22px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(183, 255, 90, 0.6);
+}
+
+@media (max-width: 600px) {
+  .modal {
+    max-height: 96vh;
+    border-radius: 14px;
+  }
+  .viewerContainer {
+    padding: 0.8rem 0.2rem 0.4rem;
+  }
+  .phoneFrame {
+    height: min(54vh, 420px);
+  }
+  .navBtn {
+    width: 36px;
+    height: 36px;
+  }
+  .prevBtn { margin-right: 0.5rem; }
+  .nextBtn { margin-left: 0.5rem; }
+  .screenTitle { font-size: 0.9rem; }
+  .screenDesc { font-size: 0.78rem; }
+  .navDotsContainer { gap: 6px; padding: 0.7rem 0.5rem; }
+  .navDot { width: 7px; height: 7px; }
+  .navDotActive { width: 18px; }
+}

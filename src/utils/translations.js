@@ -53,7 +53,30 @@ export const translations = {
       title: "Mes Projets",
       sourceCode: "Code source",
       visitSite: "Voir le projet",
+      viewScreenshots: "Feuilleter l'application",
+      mobileApp: "Application Mobile",
+      screenOf: "Écran",
+      of: "sur",
+      prevScreen: "Écran précédent",
+      nextScreen: "Écran suivant",
+      closeGallery: "Fermer la galerie",
       items: [
+        {
+          title: "KesBiz",
+          description: "Application mobile de gestion de produits et point de vente (POS) pour commerces. Suivi des stocks en temps réel avec alertes, carnet de crédit client, gestion des dépenses et encaissement multi-moyens (Cash, MonCash, Natcash).",
+          screens: [
+            { title: "Connexion & Ouverture de Caisse", desc: "Identification sécurisée pour ouvrir la caisse avec sélection bilingue (Créole / Français)." },
+            { title: "Tableau de Bord & Ventes du Jour", desc: "Suivi en temps réel des ventes, chiffre d'affaires, marge bénéficiaire estimée et créances clients." },
+            { title: "Produits & Gestion des Stocks", desc: "Catalogue d'articles avec prix d'achat, prix de vente, rayons et alertes automatiques de stock faible." },
+            { title: "Point de Vente (POS) & Caisse Rapide", desc: "Interface de caisse tactile ultra-rapide avec recherche instantanée par nom ou code-barres." },
+            { title: "Clients & Carnet de Crédit", desc: "Gestion des clients débiteurs, suivi rigoureux des crédits accordés et enregistrement des remboursements." },
+            { title: "Navigation & Modules Complets", desc: "Menu centralisé : rapports financiers P&L, abonnements SaaS, dépenses et configuration du commerce." },
+            { title: "Historique des Ventes & Reçus", desc: "Journal des transactions et reçus émis avec filtres par mode de paiement (Cash, MonCash, Natcash, Crédit)." },
+            { title: "Gestion des Dépenses de la Boutique", desc: "Suivi méthodique des charges opérationnelles (carburant pour génératrice, loyer, salaires, transport)." },
+            { title: "Paramètres & Profil du Commerce", desc: "Personnalisation de la boutique : coordonnées, adresse, catégorie et identifiant fiscal (NIF/CIN)." },
+            { title: "Configuration Reçus Thermiques", desc: "Formatage des tickets pour imprimantes thermiques de caisse avec message personnalisé en pied de ticket." }
+          ]
+        },
         {
           title: "BudgetTracker",
           description: "Application web de gestion de budget personnel pour suivre les revenus, les dépenses et le solde net, avec graphiques de tendances et historique des transactions."
@@ -176,7 +199,30 @@ export const translations = {
       title: "My Projects",
       sourceCode: "Source code",
       visitSite: "Visit project",
+      viewScreenshots: "Browse App Screens",
+      mobileApp: "Mobile App",
+      screenOf: "Screen",
+      of: "of",
+      prevScreen: "Previous screen",
+      nextScreen: "Next screen",
+      closeGallery: "Close gallery",
       items: [
+        {
+          title: "KesBiz",
+          description: "Mobile point-of-sale (POS) and inventory management app for retail shops. Real-time stock tracking with low-stock alerts, customer credit book, expense monitoring, and multi-channel local payments (Cash, MonCash, Natcash).",
+          screens: [
+            { title: "Login & Register Opening", desc: "Secure authentication to open the cash register, with bilingual language support (Creole / French)." },
+            { title: "Commercial Dashboard", desc: "Real-time overview of daily sales, turnover, estimated profit margins, customer credit, and quick actions." },
+            { title: "Products & Inventory", desc: "Full item catalog with cost, selling prices, aisle categories, and automatic low-stock notifications." },
+            { title: "Point of Sale (POS) Register", desc: "Ultra-fast touchscreen POS checkout with instant search by item name or barcode." },
+            { title: "Customers & Credit Ledger", desc: "Debtor customer management, tracking outstanding credits, and recording installment payments." },
+            { title: "Full Module Navigation", desc: "Centralized hub for sales, expenses, P&L financial statements, SaaS subscriptions, and settings." },
+            { title: "Sales History & Receipts", desc: "Transaction journal and issued receipts with payment method filters (Cash, MonCash, Natcash, Credit)." },
+            { title: "Store Expense Tracking", desc: "Methodical logging of operating expenses (generator fuel, rent, staff payroll, transport)." },
+            { title: "Store Settings & Profile", desc: "Store personalization: contact information, address, retail category, and tax ID (NIF/CIN)." },
+            { title: "Thermal Receipt Printing", desc: "POS thermal printer formatting with customized thank-you footer message." }
+          ]
+        },
         {
           title: "BudgetTracker",
           description: "Personal budget management web app to track income, expenses, and net balance, with trend charts and transaction history."
@@ -299,7 +345,30 @@ export const translations = {
       title: "Pwojè Mwen yo",
       sourceCode: "Kòd sous",
       visitSite: "Ale sou pwojè a",
+      viewScreenshots: "Fèyte Aplikasyon an",
+      mobileApp: "Aplikasyon Mobil",
+      screenOf: "Ekran",
+      of: "sou",
+      prevScreen: "Ekran anvan",
+      nextScreen: "Ekran apre",
+      closeGallery: "Fèmen galri a",
       items: [
+        {
+          title: "KesBiz",
+          description: "Aplikasyon mobil pou jesyon pwodwi ak pwen de vant (POS) pou boutik ak komès. Swivi stock an tan reyèl ak alèt, rejis kredi kliyan, jesyon depans ak peman miltip (Kach, MonCash, Natcash).",
+          screens: [
+            { title: "Koneksyon & Ouvèti Kès", desc: "Otantifikasyon sekirize pou louvri kès la ak chwa lang biling (Kreyòl / Franse)." },
+            { title: "Tablo de Bò Komèsyal", desc: "Swivi an tan reyèl sou lavant jounen an, chif d'afè, benefis estime, dèt kliyan ak aksyon rapid." },
+            { title: "Pwodwi & Jesyon Stock", desc: "Katalòg atik ak pri acha, pri vant, reyon ak alèt otomatik lè stock la ap fini." },
+            { title: "Pwen de Vant (POS) & Kès Rapid", desc: "Entèfas kès taktil rapid ak rechèch fasil pa non oswa kòd-bar." },
+            { title: "Kliyan & Rejis Kredi", desc: "Jesyon kliyan ki dwe, swivi egzak kredi yo bay ak anrejistreman ranbousman yo." },
+            { title: "Navigasyon & Modil Konplè", desc: "Meni santralize: rapò finansye P&L, abònman SaaS, depans ak konfigirasyon komès la." },
+            { title: "Istorik Lavant & Resi yo", desc: "Jounal tranzaksyon ak resi bay ak filtè selon mòd peman (Kach, MonCash, Natcash, Kredi)." },
+            { title: "Jesyon Depans Boutik la", desc: "Swivi regilye sou chaj operasyonèl yo (gaz delko, lwaye, salè, transpò)." },
+            { title: "Paramèt & Pwofil Boutik la", desc: "Pèsonalizasyon boutik la: kontak, adrès, kategori komès ak nimewo fiskal (NIF/CIN)." },
+            { title: "Konfigirasyon Resi Tèmik", desc: "Fòma tikè pou enprimant tèmik kès ak mesaj remèsiman nan pye tikè a." }
+          ]
+        },
         {
           title: "BudgetTracker",
           description: "Yon aplikasyon entènèt pou jere bidjè pèsonèl, swiv revni, depans ak balans nèt, ak grafik tandans ak istwa tranzaksyon yo."
