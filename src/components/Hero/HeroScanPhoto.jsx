@@ -16,32 +16,10 @@ import styles from './HeroScanPhoto.module.css';
 const HeroScanPhoto = ({ className = '' }) => {
   return (
     <div className={`${styles.scannerContainer} ${className}`}>
-      {/* Corner Brackets / HUD Reticles */}
-      <div className={`${styles.corner} ${styles.cornerTL}`} aria-hidden />
-      <div className={`${styles.corner} ${styles.cornerTR}`} aria-hidden />
-      <div className={`${styles.corner} ${styles.cornerBL}`} aria-hidden />
-      <div className={`${styles.corner} ${styles.cornerBR}`} aria-hidden />
+      {/* Rotating Rectangle larger than the photo, spinning indefinitely */}
+      <div className={styles.rotatingRectangle} aria-hidden />
 
-      {/* Top HUD Telemetry */}
-      <div className={styles.topTelemetry} aria-hidden>
-        <span className={styles.telemetryTag}>
-          <span className={styles.pulseDot} />
-          SYS.BIO // SCAN: 01
-        </span>
-        <span className={styles.telemetryBadge}>REC • 60FPS</span>
-      </div>
-
-      {/* Bottom HUD Telemetry */}
-      <div className={styles.bottomTelemetry} aria-hidden>
-        <span className={styles.telemetryCoords}>+ 18.5204° N / 72.3387° W</span>
-        <span className={styles.telemetryStatus}>STATUS: VERIFIED</span>
-      </div>
-
-      {/* Crosshair accents */}
-      <div className={`${styles.crosshair} ${styles.crosshairL}`} aria-hidden>+</div>
-      <div className={`${styles.crosshair} ${styles.crosshairR}`} aria-hidden>+</div>
-
-      {/* Viewport Frame */}
+      {/* Viewport Frame (Centered Photo) */}
       <div className={styles.viewportFrame}>
         {/* Profile Image (undistorted) */}
         <img

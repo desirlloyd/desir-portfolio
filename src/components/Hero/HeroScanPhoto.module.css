@@ -4,6 +4,9 @@
   width: 320px;
   height: 320px;
   user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (min-width: 1200px) {
@@ -17,7 +20,7 @@
   .scannerContainer {
     width: 260px;
     height: 260px;
-    margin: 0 auto;
+    margin: 1.5rem auto;
   }
 }
 
@@ -25,140 +28,50 @@
   .scannerContainer {
     width: 220px;
     height: 220px;
-  }
-
-  .telemetryCoords {
-    display: none; /* HUD row wraps onto the corner brackets at this width */
+    margin: 1rem auto;
   }
 }
 
-/* ── HUD Corner Reticles / Brackets ──────────────────────── */
-.corner {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  border-color: var(--accent-green);
-  z-index: 6;
-  pointer-events: none;
-  filter: drop-shadow(0 0 4px rgba(183, 255, 90, 0.6));
-}
-
-.cornerTL {
-  top: -7px;
-  left: -7px;
-  border-top: 2px solid var(--accent-green);
-  border-left: 2px solid var(--accent-green);
-}
-
-.cornerTR {
-  top: -7px;
-  right: -7px;
-  border-top: 2px solid var(--accent-green);
-  border-right: 2px solid var(--accent-green);
-}
-
-.cornerBL {
-  bottom: -7px;
-  left: -7px;
-  border-bottom: 2px solid var(--accent-green);
-  border-left: 2px solid var(--accent-green);
-}
-
-.cornerBR {
-  bottom: -7px;
-  right: -7px;
-  border-bottom: 2px solid var(--accent-green);
-  border-right: 2px solid var(--accent-green);
-}
-
-/* ── HUD Telemetry Labels ────────────────────────────────── */
-.topTelemetry {
-  position: absolute;
-  top: -24px;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: var(--font-mono);
-  font-size: 0.64rem;
-  letter-spacing: 0.08em;
-  color: var(--accent-green);
-  z-index: 5;
-  pointer-events: none;
-}
-
-.telemetryTag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: rgba(183, 255, 90, 0.08);
-  padding: 0.15rem 0.45rem;
-  border-radius: 3px;
-  border: 1px solid rgba(183, 255, 90, 0.25);
-  font-weight: 600;
-}
-
-.pulseDot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent-green);
-  box-shadow: 0 0 6px var(--accent-green);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .pulseDot {
-    animation: pulseLight 1.8s ease-in-out infinite;
-  }
-}
-
-.telemetryBadge {
-  color: var(--text-muted);
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
-}
-
-.bottomTelemetry {
-  position: absolute;
-  bottom: -22px;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.06em;
-  color: var(--text-muted);
-  z-index: 5;
-  pointer-events: none;
-}
-
-.telemetryCoords {
-  color: var(--text-muted);
-}
-
-.telemetryStatus {
-  color: var(--accent-green);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-}
-
-/* Crosshairs on sides */
-.crosshair {
+/* ── Rotating Outer Rectangle ────────────────────────────── */
+.rotatingRectangle {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: rgba(183, 255, 90, 0.5);
-  z-index: 6;
+  left: 50%;
+  width: calc(100% + 44px);
+  height: calc(100% + 68px);
+  border: 2px solid rgba(183, 255, 90, 0.45);
+  border-radius: 26px;
+  box-shadow:
+    0 0 24px rgba(183, 255, 90, 0.2),
+    0 0 45px rgba(125, 232, 255, 0.12),
+    inset 0 0 16px rgba(183, 255, 90, 0.08);
   pointer-events: none;
+  z-index: 1;
+  animation: rotateInfinite 20s linear infinite;
 }
 
-.crosshairL { left: -14px; }
-.crosshairR { right: -14px; }
+@media (max-width: 480px) {
+  .rotatingRectangle {
+    width: calc(100% + 32px);
+    height: calc(100% + 48px);
+    border-radius: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rotatingRectangle {
+    animation: none;
+  }
+}
+
+@keyframes rotateInfinite {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
 
 /* ── Viewport Frame ──────────────────────────────────────── */
 .viewportFrame {
@@ -329,16 +242,5 @@
     box-shadow:
       0 0 18px rgba(183, 255, 90, 0.1),
       0 12px 35px rgba(0, 0, 0, 0.7);
-  }
-}
-
-@keyframes pulseLight {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.35;
-    transform: scale(0.85);
   }
 }
