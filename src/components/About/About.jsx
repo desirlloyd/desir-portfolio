@@ -36,7 +36,6 @@ const About = () => {
   const stats = [
     { number: 1, suffix: '+', label: t('about.stats.exp') },
     { number: 3, suffix: '+', label: t('about.stats.education') },
-    { number: 3, suffix: '', label: t('about.stats.languages') },
   ];
 
   return (

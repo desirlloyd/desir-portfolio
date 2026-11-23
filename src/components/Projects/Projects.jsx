@@ -7,7 +7,6 @@ import { useLanguage } from '../../hooks/useLanguage';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import budgetTrackerImg from '../../assets/budgettracker.png';
 import ginTypeImg from '../../assets/gintype.png';
-import word2pdfImg from '../../assets/word2pdf.png';
 import { kesbizScreens, img02 } from './kesbizData';
 import ScreenGalleryModal from './ScreenGalleryModal';
 import styles from './Projects.module.css';
@@ -34,13 +33,6 @@ const projectsData = [
     image: ginTypeImg,
     tags: ['HTML', 'CSS', 'Javascript'],
     live: 'https://gintype-dlbj.netlify.app/'
-  },
-  {
-    title: 'Word2PDF',
-    description: 'Application web de conversion de documents Word en PDF, avec traitement 100% local pour garantir la confidentialité des fichiers.',
-    image: word2pdfImg,
-    tags: ['Typescript', 'Python'],
-    live: 'https://word2pdf-dlbj.netlify.app/'
   }
 ];
 

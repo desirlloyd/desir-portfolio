@@ -84,10 +84,6 @@ export const translations = {
         {
           title: "GinType",
           description: "Application web de test de vitesse de frappe pour mesurer le WPM et la précision, avec choix de durée et niveaux de texte."
-        },
-        {
-          title: "Word2PDF",
-          description: "Application web de conversion de documents Word en PDF, avec traitement 100% local pour garantir la confidentialité des fichiers."
         }
       ]
     },
@@ -230,10 +226,6 @@ export const translations = {
         {
           title: "GinType",
           description: "Web-based typing speed test app to measure WPM and accuracy, with customizable duration and text difficulty levels."
-        },
-        {
-          title: "Word2PDF",
-          description: "Web app to convert Word documents to PDF, with 100% local processing to ensure file confidentiality."
         }
       ]
     },
@@ -376,10 +368,6 @@ export const translations = {
         {
           title: "GinType",
           description: "Yon aplikasyon entènèt pou teste vitès tape ou, mezire WPM ak presizyon, ak chwa dire ak nivo difikilte tèks."
-        },
-        {
-          title: "Word2PDF",
-          description: "Aplikasyon entènèt pou konvèti dokiman Word an PDF, ak tretman 100% lokal pou pwoteje konfidansyalite fichye yo."
         }
       ]
     },
